@@ -77,6 +77,9 @@ if [[ "$ROLE" = "executor" ]]; then
   echo "    scheduler_ips:" >> conf/cloudburst-config.yml
   echo "$LST" >> conf/cloudburst-config.yml
 
+  echo "    memory_addrmemory_addr:" >> conf/cloudburst-config.yml
+  echo "$LST" >> conf/cloudburst-config.yml
+
   while true; do
     python3.6 cloudburst/server/executor/server.py
 

@@ -3,6 +3,8 @@ mgmt_ip: NULL
 executor:
   scheduler_ips:
     - 127.0.0.1
+  memory_addr:
+    - 127.0.0.1
   thread_id: 0
 scheduler:
   routing_address: 127.0.0.1
