@@ -77,7 +77,9 @@ if [[ "$ROLE" = "executor" ]]; then
   echo "    scheduler_ips:" >> conf/cloudburst-config.yml
   echo "$LST" >> conf/cloudburst-config.yml
 
-  echo "    memory_addrmemory_addr:" >> conf/cloudburst-config.yml
+  LST=$(gen_yml_list "$MEMORY_ADDR")
+
+  echo "    memory_ips:" >> conf/cloudburst-config.yml
   echo "$LST" >> conf/cloudburst-config.yml
 
   while true; do
