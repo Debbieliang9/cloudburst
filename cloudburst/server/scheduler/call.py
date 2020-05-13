@@ -14,6 +14,7 @@
 
 import time
 import uuid
+import logging
 
 from cloudburst.server.scheduler import utils
 import cloudburst.server.utils as sutils
@@ -51,6 +52,7 @@ def call_function(func_call_socket, pusher_cache, policy):
     if result is None:
         response.success = False
         response.error = NO_RESOURCES
+        logging.info("response.error = NO_RESOURCES")
         func_call_socket.send(response.SerializeToString())
         return
 
