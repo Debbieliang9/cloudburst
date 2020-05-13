@@ -406,4 +406,7 @@ if __name__ == '__main__':
     exec_conf = conf['executor']
 
     executor(conf['ip'], conf['mgmt_ip'], exec_conf['scheduler_ips'],
-             int(exec_conf['thread_id']), exec_conf['memory_ips'])
+             int(exec_conf['thread_id']))
+
+        # executor(conf['ip'], conf['mgmt_ip'], exec_conf['scheduler_ips'],
+        #      int(exec_conf['thread_id']), exec_conf['memory_ips'])
