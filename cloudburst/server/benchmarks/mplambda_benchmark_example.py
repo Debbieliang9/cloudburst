@@ -3,7 +3,7 @@ import struct
 import logging
 from cloudburst.client.client import CloudburstConnection
 # change this every time the cluster restarts
-dc = CloudburstConnection('ab1d02f20a6c144e591dd536ebeabab0-595093461.us-east-1.elb.amazonaws.com', '75.101.215.70') # function_elb, driver_node_ip
+dc = CloudburstConnection('ac1289ad5852c45cbb4d79104c089992-2032423516.us-east-1.elb.amazonaws.com', '75.101.215.70') # function_elb, driver_node_ip
 
 
 #PATH_RVF = 0xb11b0c45
@@ -62,7 +62,7 @@ cloud_func = dc.register(mpl_anna, 'mpl_anna')
 # wait for 1 second for the registration process to fully finish
 time.sleep(1)
 # f = open("result_" + str(time.time()) + ".txt", "w")
-f = open("result_" + "k_20_l_400_mem" + ".txt", "w")
+f = open("result_" + "k_20_l_400_mem_3" + ".txt", "w")
 
 
 run = 0
@@ -77,7 +77,7 @@ while run < 50:
     print("solution_key = ", solution_key)
     future_list = []   
     for i in range(400): # parallely run. 10 is the number of function requests. TODO: spin up more nodes
-        future_list.append(cloud_func('a678e24876b9b48aeaa841416bee6be4-649963729.us-east-1.elb.amazonaws.com', solution_key)) # routing_elb
+        future_list.append(cloud_func('ac5215b807ba9450eb52691601b155ce-1780415108.us-east-1.elb.amazonaws.com', solution_key)) # routing_elb
     count = 1
     print("[[",future_list,"]]")
     for future in future_list:
@@ -115,9 +115,11 @@ while run < 50:
     f.write(output + '\n')
     #print(result.priority)
     while True:
-        result_heap = dc.kvs_client.get(solution_key)[solution_key].payload
-        new_result = result_heap.peekitem(0)
-        print("length!! = ", len(result_heap))
+        result_lattice = dc.kvs_client.get(solution_key)[solution_key]
+        if not result_lattice:
+            continue
+        new_result = result_lattice.payload.peekitem(0)
+        print("length!! = ", len(result_lattice.payload))
         if not new_result is None and new_result[0] < result[0]: # priority is proportional to path length. the lower the better
             # top K -> pick shortest 
             result = new_result
