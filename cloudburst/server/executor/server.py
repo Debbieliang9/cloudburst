@@ -40,7 +40,7 @@ from cloudburst.shared.proto.internal_pb2 import (
 REPORT_THRESH = 5
 
 
-def executor(ip, mgmt_ip, schedulers, thread_id):
+def executor(ip, mgmt_ip, schedulers, thread_id, memory_id):
     logging.basicConfig(filename='log_executor.txt', level=logging.INFO,
                         format='%(asctime)s %(message)s')
 
@@ -91,6 +91,10 @@ def executor(ip, mgmt_ip, schedulers, thread_id):
 
     user_library = CloudburstUserLibrary(context, pusher_cache, ip, thread_id,
                                       client)
+
+    for i in range(4):
+        dest = memory_id, i
+        user_library.send_mem_ip(dest)
 
     status = ThreadStatus()
     status.ip = ip
@@ -406,4 +410,4 @@ if __name__ == '__main__':
     exec_conf = conf['executor']
 
     executor(conf['ip'], conf['mgmt_ip'], exec_conf['scheduler_ips'],
-             int(exec_conf['thread_id']))
+             int(exec_conf['thread_id']), exec_conf['memory_id'])

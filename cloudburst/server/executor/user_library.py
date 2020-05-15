@@ -100,6 +100,14 @@ class CloudburstUserLibrary(AbstractCloudburstUserLibrary):
 
         socket = self.pusher_cache.get(dest_addr)
         socket.send_pyobj((sender, bytestr))
+        
+    def send_mem_ip(self, dest):
+        ip, tid = dest
+        dest_addr = 'tcp://' + ip + ':' + str(int(tid) + 2700)
+        sender = (self.executor_ip, self.executor_tid)
+
+        socket = self.pusher_cache.get(dest_addr)
+        socket.send_pyobj((sender, self.executor_ip))
 
     # We see if any messages have been sent to this thread. We return an empty
     # list if there are none.
