@@ -79,7 +79,7 @@ if [[ "$ROLE" = "executor" ]]; then
 
   LST=$(gen_yml_list "$MEMORY_ADDR")
 
-  echo "    memory_ip:" >> conf/cloudburst-config.yml
+  echo "    memory_id:" >> conf/cloudburst-config.yml
   echo "$LST" >> conf/cloudburst-config.yml
 
   while true; do
