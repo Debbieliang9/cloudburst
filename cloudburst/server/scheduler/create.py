@@ -42,7 +42,9 @@ def create_function(func_create_socket, kvs, consistency=NORMAL):
 
     if consistency == NORMAL:
         body = LWWPairLattice(sutils.generate_timestamp(0), func.body)
+        logging.info("before put")
         kvs.put(name, body)
+        logging.info("after put")
     else:
         skcl = SingleKeyCausalLattice(sutils.DEFAULT_VC,
                                       SetLattice({func.body}))

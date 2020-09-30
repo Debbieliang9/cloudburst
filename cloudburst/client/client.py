@@ -129,14 +129,17 @@ class CloudburstConnection():
         name: A unique name for the function to be stored with in the system.
         '''
 
+        print("init register")
         func = Function()
         func.name = name
         func.body = serializer.dump(function)
 
         self.func_create_sock.send(func.SerializeToString())
 
+        print("before ParseFromString")
         resp = GenericResponse()
         resp.ParseFromString(self.func_create_sock.recv())
+        print("after ParseFromString")
 
         if resp.success:
             registered_functon = CloudburstFunction(name, self, self.kvs_client)
