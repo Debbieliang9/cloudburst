@@ -54,7 +54,9 @@ def create_function(func_create_socket, kvs, consistency=NORMAL):
     funcs.append(name)
     utils.put_func_list(kvs, funcs)
 
+    logging.info("before func_create_socket.send in cloudburst create.")
     func_create_socket.send(sutils.ok_resp)
+    logging.info("after func_create_socket.send in cloudburst create.")
 
 
 def create_dag(dag_create_socket, pusher_cache, kvs, dags, policy,
