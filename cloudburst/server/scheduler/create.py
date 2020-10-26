@@ -40,6 +40,8 @@ def create_function(func_create_socket, kvs, consistency=NORMAL):
     name = sutils.get_func_kvs_name(func.name)
     logging.info('Creating function %s.' % (name))
 
+    logging.info("consistency:")
+    logging.info(consistency)
     if consistency == NORMAL:
         body = LWWPairLattice(sutils.generate_timestamp(0), func.body)
         logging.info("before put")
