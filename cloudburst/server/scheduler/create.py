@@ -38,7 +38,7 @@ def create_function(func_create_socket, kvs, consistency=NORMAL):
     func.ParseFromString(func_create_socket.recv())
 
     name = sutils.get_func_kvs_name(func.name)
-    logging.info('Creating function %s.' % (name))
+    logging.info('Creating function debug %s.' % (name))
 
     logging.info("consistency:")
     logging.info(consistency)
