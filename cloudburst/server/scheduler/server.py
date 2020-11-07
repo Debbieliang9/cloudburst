@@ -149,7 +149,9 @@ def scheduler(ip, mgmt_ip, route_addr):
         socks = dict(poller.poll(timeout=1000))
 
         if connect_socket in socks and socks[connect_socket] == zmq.POLLIN:
+            logging.info("before connect_socket.recv_string")
             msg = connect_socket.recv_string()
+
             connect_socket.send_string(route_addr)
 
         if (func_create_socket in socks and
